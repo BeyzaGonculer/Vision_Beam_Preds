@@ -9,11 +9,16 @@ Your directory structure should look like this:
 
 beam_pred/
 ├── dataset/
-│   └── unit1/
-│       └── [image files...]
-├── src/
+│ └── unit1/
+│ └── [image files...]
 ├── models/
+├── src/
+├── README.md
 ├── ...
+
+markdown
+Kopyala
+Düzenle
 
 
 > ⚠️ **Note:** The dataset is not included in this repository due to size limitations. Please download it manually.
