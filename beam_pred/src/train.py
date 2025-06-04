@@ -2,9 +2,7 @@ import torch
 import torch.nn as nn
 
 def train_model(model, dataloader, optimizer, device, num_epochs=5):
-    """
-    Basit bir eğitim döngüsü
-    """
+   
     model.to(device)
     criterion = nn.CrossEntropyLoss()
 
@@ -18,18 +16,17 @@ def train_model(model, dataloader, optimizer, device, num_epochs=5):
             images = images.to(device)
             labels = labels.to(device)
 
-            # Sıfırla
+           
             optimizer.zero_grad()
 
-            # İleri yayılım
             outputs = model(images)
             loss = criterion(outputs, labels)
 
-            # Geri yayılım
+          
             loss.backward()
             optimizer.step()
 
-            # Kayıp ve doğruluk hesapla
+           
             running_loss += loss.item() * images.size(0)
             _, preds = torch.max(outputs, 1)
             total_correct += (preds == labels).sum().item()
