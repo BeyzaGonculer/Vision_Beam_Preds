@@ -4,12 +4,12 @@ from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
 import torch
 
-# Modeli yükle
+
 model = get_model(num_classes=64)
 model.load_state_dict(torch.load("beam_model.pth"))
 model.eval()
 
-# Test verisi
+
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor()
@@ -22,11 +22,11 @@ dataset = BeamPredictionDataset(
 )
 dataloader = DataLoader(dataset, batch_size=32, shuffle=False)
 
-# Cihaz
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model.to(device)
 
-# Doğruluk ölçümleri
+
 top1_correct = 0
 top2_correct = 0
 top3_correct = 0
@@ -40,22 +40,22 @@ with torch.no_grad():
         outputs = model(images)
         topk = torch.topk(outputs, k=3, dim=1).indices  # (batch_size, 3)
 
-        # Top-1
+       
         top1_correct += (topk[:, 0] == labels).sum().item()
 
-        # Top-2
+        
         for i in range(labels.size(0)):
             if labels[i] in topk[i, :2]:
                 top2_correct += 1
 
-        # Top-3
+        
         for i in range(labels.size(0)):
             if labels[i] in topk[i, :3]:
                 top3_correct += 1
 
         total += labels.size(0)
 
-# Skorlar
+
 print(f"Top-1 Accuracy: {top1_correct / total:.4f} ({100 * top1_correct / total:.2f}%)")
 print(f"Top-2 Accuracy: {top2_correct / total:.4f} ({100 * top2_correct / total:.2f}%)")
 print(f"Top-3 Accuracy: {top3_correct / total:.4f} ({100 * top3_correct / total:.2f}%)")
