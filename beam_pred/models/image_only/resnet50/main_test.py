@@ -47,7 +47,7 @@ with torch.no_grad():
                 top3_correct += 1
 
         total += labels.size(0)
-
+        
 print(f"Top-1 Accuracy: {top1_correct / total:.4f} ({100 * top1_correct / total:.2f}%)")
 print(f"Top-2 Accuracy: {top2_correct / total:.4f} ({100 * top2_correct / total:.2f}%)")
 print(f"Top-3 Accuracy: {top3_correct / total:.4f} ({100 * top3_correct / total:.2f}%)")
