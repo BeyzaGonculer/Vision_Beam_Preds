@@ -16,9 +16,9 @@ loader = DataLoader(dataset, batch_size=4, shuffle=True)
 for batch in loader:
     images, power_values, labels = batch
 
-    print("🔹 Image Tensor Shape:", images.shape)         # [B, 3, 224, 224]
-    print("🔸 Power Tensor Shape:", power_values.shape)   # [B, 64]
-    print("🎯 Labels:", labels)                           # [B]
+    print(" Image Tensor Shape:", images.shape)         
+    print(" Power Tensor Shape:", power_values.shape)   
+    print(" Labels:", labels)                          
 
     break 
 
