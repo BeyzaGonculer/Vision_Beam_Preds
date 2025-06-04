@@ -4,12 +4,12 @@ from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
 import torch
 
-# Modeli yükle
+
 model = get_model(num_classes=64)
 model.load_state_dict(torch.load("beam_model_b1.pth"))
 model.eval()
 
-# Val verisi
+
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor()
@@ -22,11 +22,11 @@ dataset = BeamPredictionDataset(
 )
 dataloader = DataLoader(dataset, batch_size=32, shuffle=False)
 
-# Cihaz
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model.to(device)
 
-# Doğruluk ölçümleri
+
 top1_correct = 0
 top2_correct = 0
 top3_correct = 0
